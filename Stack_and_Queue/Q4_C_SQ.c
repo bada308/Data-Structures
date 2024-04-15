@@ -112,7 +112,18 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	if (q == NULL) return;
+	
+	Stack tmp = {0, NULL, NULL};
+
+	// queue에서 값을 꺼내서 stack에 삽입
+	while (q->ll.size > 0) {
+		int removed = dequeue(q);
+		push(&tmp, removed);
+	}
+
+	// queue의 ll을 stack의 ll로 변경
+	q->ll = tmp.ll;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

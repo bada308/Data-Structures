@@ -104,7 +104,65 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	int sm, md, lg;
+	sm = 0;
+	md = 0;
+	lg = 0;
+
+	Stack stack = {0, NULL};
+
+	for (int i = 0; i < sizeof(expression); i++) {
+		// 여는 괄호 나오면 괄호 개수 +1
+		// 닫는 괄호 나왔는데 stack의 top이 짝이 맞는 여는 괄호라면 괄호 개수 -1
+		switch (expression[i])
+		{
+		case '(':
+			push(&stack, expression[i]);
+			sm++;
+			break;
+		case ')':
+			if (stack.ll.head->item == '(') {
+				pop(&stack);
+				sm--;
+			} else {
+				push(&stack, expression[i]);
+			}
+			break;
+		case '{':
+			push(&stack, expression[i]);
+			md++;
+			break;
+		case '}':
+			if (stack.ll.head->item == '{') {
+				pop(&stack);
+				md--;
+			} else {
+				push(&stack, expression[i]);
+			}
+			break;
+		case '[':
+			push(&stack, expression[i]);
+			lg++;
+			break;
+		case ']':
+			if (stack.ll.head->item == '[') {
+				pop(&stack);
+				lg--;
+			} else {
+				push(&stack, expression[i]);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	// 최종적으로 괄호 count가 모두 0이면 balanced
+	if (sm == 0 & md == 0 & lg == 0) {
+		return 0;
+	} else {
+		return 1;
+	}
 }
 
 ////////////////////////////////////////////////////////////

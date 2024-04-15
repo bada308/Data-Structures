@@ -111,7 +111,16 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
-/* add your code here */
+	if (s == NULL) return;
+	ListNode* cur;
+	cur = s->ll.head;
+
+	// value 발견할 때까지 stack pop
+	while (s->ll.size > 0 & cur != NULL) {
+		if (cur->item == value) break;
+		cur = cur->next;
+		pop(s);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

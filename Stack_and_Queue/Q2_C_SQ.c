@@ -86,6 +86,7 @@ int main()
 			createStackFromLinkedList(&ll, &s); // You need to code this function
 			printf("The resulting stack is: ");
 			printList(&(s.ll));
+			printf("\n");
 			break;
 		case 3:
 			removeEvenValues(&s); // You need to code this function
@@ -93,6 +94,7 @@ int main()
 			printList(&(s.ll));
 			removeAllItemsFromStack(&s);
 			removeAllItems(&ll);
+			printf("\n");
 			break;
 		case 0:
 			removeAllItemsFromStack(&s);
@@ -113,12 +115,34 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+    if (ll == NULL | s == NULL) {
+		return;
+	}
+	
+	ListNode* cur;
+	cur = ll->head;
+
+	// ll 받아서 stack에 삽입
+	while (cur != NULL) {
+		push(s, cur->item);
+		cur = cur->next;
+	}
 }
 
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	LinkedList tmp = {0, NULL};
+	ListNode* cur;
+
+	cur = s->ll.head;
+	while (cur != NULL) {
+		if (cur->item % 2 == 1) {
+			insertNode(&tmp, tmp.size, cur->item);
+		}
+		cur = cur->next;
+	}
+	removeAllItems(&(s->ll));
+	s->ll = tmp;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
