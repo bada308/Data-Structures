@@ -101,9 +101,27 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int sumOfOddNodes(BTNode *node)
-
 {
-    /* add your code here */
+    if (node == NULL) return 0;
+    Stack tmp = {NULL};
+    int sumOfOdd = 0;
+
+    while (node != NULL) {
+        // level 순회하며 홀수 발견 시 return 값에 더하기
+        if (node->item % 2 == 1) {
+            sumOfOdd += node->item;
+        }
+
+        if (node->right != NULL) {
+            push(&tmp, node->right);
+        }
+        if (node->left != NULL) {
+            push(&tmp, node->left);
+        }
+
+        node = pop(&tmp);
+    }
+    return sumOfOdd;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

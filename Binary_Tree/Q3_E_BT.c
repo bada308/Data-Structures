@@ -101,7 +101,26 @@ int main()
 int countOneChildNodes(BTNode *node)
 
 {
-    /* add your code here */
+    if (node == NULL) return 0;
+    int oneChildCount = 0;
+
+    Stack tmp = {NULL};
+
+    while (node != NULL) {
+        // level 순회하며 자식이 하나뿐인 node 발견 시 return 값에 +1
+        if ((node->left == NULL & node->right != NULL) | (node->left != NULL & node->right == NULL)) {
+            oneChildCount++;
+        }
+
+        if (node->right != NULL) {
+            push(&tmp, node->right);
+        }
+        if (node->left != NULL) {
+            push(&tmp, node->left);
+        }
+        node = pop(&tmp);
+    }
+    return oneChildCount;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

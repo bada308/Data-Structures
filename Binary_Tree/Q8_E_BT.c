@@ -80,6 +80,7 @@ int main()
                 printf("\nThe values stored in all nodes of the tree that has at least one great-grandchild are: ");
                 hasGreatGrandchild(root);
                 removeAll(&root);
+                printf("\n\n");
                 break;
             case 0:
                 removeAll(&root);
@@ -102,7 +103,18 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+	if (node == NULL) return -1;
+    if (node->left == NULL & node->right == NULL) return 0;
+
+    // 가장 어린? 후손(leaf node)과 본인의 높이 차이 계산
+    int leftCount = hasGreatGrandchild(node->left);
+    int rightCount = hasGreatGrandchild(node->right);
+    int childCount = leftCount > rightCount ? leftCount + 1 : rightCount + 1;
+
+    // 증손자가 존재하면 출력
+    if (childCount >= 3) printf("%d ", node->item);
+    
+    return childCount;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

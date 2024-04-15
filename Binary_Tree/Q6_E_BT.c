@@ -105,7 +105,26 @@ int main()
 
 void printSmallerValues(BTNode *node, int m)
 {
-	/* add your code here */
+	if (node == NULL) return;
+
+    Stack tmp = {NULL};
+
+    // level 순회하며 m보다 작은 값을 가진 node 발견 시 print
+    while (node != NULL)
+    {
+        if (node->item < m) {
+            printf("%d ", node->item);
+        }
+
+        if (node->right != NULL) {
+            push(&tmp, node->right);
+        }
+        if (node->left != NULL) {
+            push(&tmp, node->left);
+        }
+        
+        node = pop(&tmp);
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

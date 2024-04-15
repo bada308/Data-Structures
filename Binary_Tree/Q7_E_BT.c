@@ -102,7 +102,25 @@ int main()
 
 int smallestValue(BTNode *node)
 {
-	/* add your code here */
+	if (node == NULL) return 0;
+    int smallest = node->item;
+
+    Stack tmp = {NULL};
+
+    // level 순회하며 최솟값 찾기
+    while (node != NULL) {
+        smallest = node->item < smallest ? node->item : smallest;
+
+        if (node->right != NULL) {
+            push(&tmp, node->right);
+        }
+        if (node->left != NULL) {
+            push(&tmp, node->left);
+        }
+        node = pop(&tmp);
+    }
+
+    return smallest;    
 }
 
 //////////////////////////////////////////////////////////////////////////////////

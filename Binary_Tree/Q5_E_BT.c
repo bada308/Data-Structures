@@ -105,7 +105,27 @@ int main()
 
 void mirrorTree(BTNode *node)
 {
-	/* add your code here */
+	if (node == NULL) return;
+    Stack tmp = {NULL};
+    BTNode* tmpNode;
+
+    while (node != NULL) {
+        // level 순회하면서 왼쪽 자식과 오른쪽 자식 swap
+        
+        // swap
+        tmpNode = node->left;
+        node->left = node->right;
+        node->right = tmpNode;
+
+        if (node->right != NULL) {
+            push(&tmp, node->right);
+        }
+        if (node->left != NULL) {
+            push(&tmp, node->left);
+        }
+
+        node = pop(&tmp);
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

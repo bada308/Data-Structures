@@ -95,9 +95,18 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int maxHeight(BTNode *node)
-
 {
-    /* add your code here */
+    if (node == NULL) return -1;
+    if (node->left == NULL & node->right == NULL) {
+        // leaf 노드일 시 0 리턴
+        return 0;
+    } else {
+        // (자식 노드의 높이 중 큰 값) +1 리턴
+        int leftHeight = maxHeight(node->left);
+        int rightHeight = maxHeight(node->right);
+
+        return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
