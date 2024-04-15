@@ -102,7 +102,34 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+	if (ll == NULL){
+		return;
+	}
+
+	ListNode* cur;
+	cur = ll->head;
+	int mid;
+
+	// ll의 크기를 이용해 분리할 mid index 찾기
+	if (ll->size % 2 == 0){
+		mid = ll->size / 2;
+	} else {
+		mid = ll->size / 2 + 1;
+	}
+
+	// frontLL
+	for (int i=0; i < mid; i++){
+		insertNode(resultFrontList, resultFrontList->size, cur->item);
+		cur = cur->next;
+	}
+
+	// backLL
+	for (int i=mid; i < ll->size; i++) {
+		insertNode(resultBackList, resultBackList->size, cur->item);
+		cur = cur->next;
+	}
+
+	return;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

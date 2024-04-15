@@ -87,7 +87,35 @@ int main()
 
 void RecursiveReverse(ListNode **ptrHead)
 {
-	/* add your code here */
+	if (ptrHead == NULL){
+		return;
+	}
+
+	ListNode* cur = *ptrHead;
+	ListNode* prev = NULL;
+
+	// 길이가 1이면 바로 리턴
+	if(cur->next == NULL){
+		return;
+	}
+
+	// tail 노드 찾기
+	while (cur->next != NULL){
+		if (cur->next->next == cur){
+			break;
+		}
+		prev = cur;
+		cur = cur->next;
+	}
+
+	// tail 노드의 next를 tail 이전 노드로 변경
+	cur->next = prev;
+	if (cur != *ptrHead) {
+		RecursiveReverse(ptrHead);
+	}
+	*ptrHead = cur;
+
+	return;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

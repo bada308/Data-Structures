@@ -103,7 +103,29 @@ int main()
 
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
-    /* add your code here */
+    ListNode *cur1;
+	ListNode *cur2;
+
+	if (ll1 == NULL | ll2 == NULL){
+		return;
+	}
+
+	cur1 = ll1->head;
+	cur2 = ll2->head;
+
+	while(cur1 != NULL & cur2 != NULL){
+		ll2->head = cur2->next; // ll2에서 첫 번째 요소 제거
+		
+		// ll2에서 제거된 첫 번째 요소를 ll1에 삽입
+		cur2->next = cur1->next; 
+		cur1->next = cur2;
+
+		// cur1, cur2 업데이트
+		cur1 = cur1->next->next;
+		cur2 = ll2->head;
+	}
+
+	return;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

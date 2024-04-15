@@ -90,7 +90,38 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	ListNode *cur;
+
+	if (ll == NULL){
+		return -1;
+	}
+	
+	cur = ll->head;
+	
+	// SortedLinkedLL이 비어있을 때
+	if (cur == NULL){
+		insertNode(ll, 0, item);
+		return 0;
+	}
+
+	// LL 순회하면서 item이 들어갈 자리 찾기
+	int index = 0;
+	while (cur != NULL)
+	{
+		if(cur->item == item){
+			return -1;
+		}
+		if(cur->item > item){
+			insertNode(ll, index, item);
+			return index;
+		}
+		cur = cur->next;
+		index++;
+	}
+
+	// 적절한 자리가 없다면 맨 마지막에 추가
+	insertNode(ll, index, item);
+	return index;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
