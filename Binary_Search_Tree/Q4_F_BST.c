@@ -73,6 +73,7 @@ int main()
 			printf("The resulting post-order traversal of the binary search tree is: ");
 			postOrderIterativeS1(root); // You need to code this function
 			printf("\n");
+			removeAll(&root);
 			break;
 		case 0:
 			removeAll(&root);
@@ -91,7 +92,26 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
+	if (root == NULL) return;
+	Stack tmp = {NULL};
+
+	while (1) {
+		// 왼쪽 자식이 NULL이 될 때까지 () stack에 push
+		for(;root;root = root->left) {
+			if(root->item != -1) push(&tmp, root);
+		}
+		root = pop(&tmp);
+		if (root == NULL) break;
+		if (root->right != NULL) {
+			if (root->right->item != -1){
+				push(&tmp, root);
+				root = root->right;
+				continue;
+			}
+		}
+		printf("%d ", root->item);
+		root->item = -1;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

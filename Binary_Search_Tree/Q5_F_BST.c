@@ -59,7 +59,7 @@ int main()
 
 	while (c != 0)
 	{
-		printf("Please input your choice(1/2/0): ");
+		printf("Please input your choice(1/2/3/0): ");
 		scanf("%d", &c);
 
 		switch (c)
@@ -91,7 +91,31 @@ int main()
 
 void postOrderIterativeS2(BSTNode *root)
 {
-	 /* add your code here */
+	if (root == NULL) return;
+
+	Stack tmp1 = {NULL};
+	Stack tmp2 = {NULL};
+	push(&tmp1, root);
+
+	while (1) {
+		root = pop(&tmp1);
+		if (!root) break;
+		push(&tmp2, root);
+
+		if (root->left != NULL) {
+			push(&tmp1, root->left);
+		}
+		if (root->right != NULL) {
+			push(&tmp1, root->right);
+		}
+	}
+
+	while(1) {
+		root = pop(&tmp2);
+		if (!root) break;
+		printf("%d ", root->item);
+	}
+	
 }
 
 /* Given a binary search tree and a key, this function
@@ -100,6 +124,7 @@ BSTNode* removeNodeFromTree(BSTNode *root, int value)
 {
 	/* add your code here */
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 
 void insertBSTNode(BSTNode **node, int value){
