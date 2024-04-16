@@ -95,23 +95,23 @@ void postOrderIterativeS1(BSTNode *root)
 	if (root == NULL) return;
 	Stack tmp = {NULL};
 
-	while (1) {
-		// 왼쪽 자식이 NULL이 될 때까지 () stack에 push
+	do {
 		for(;root;root = root->left) {
-			if(root->item != -1) push(&tmp, root);
+			if (root->right != NULL) push(&tmp, root->right);
+			push(&tmp, root);
 		}
+
 		root = pop(&tmp);
-		if (root == NULL) break;
-		if (root->right != NULL) {
-			if (root->right->item != -1){
-				push(&tmp, root);
-				root = root->right;
-				continue;
-			}
+
+		if (root->right != NULL && peek(&tmp) == root->right) {
+			pop(&tmp);
+			push(&tmp, root);
+			root = root->right;
+		} else {
+			printf("%d ", root->item);
+			root = NULL;
 		}
-		printf("%d ", root->item);
-		root->item = -1;
-	}
+	} while (!isEmpty(&tmp));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
