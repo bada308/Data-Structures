@@ -103,7 +103,10 @@ void postOrderIterativeS1(BSTNode *root)
 
 		root = pop(&tmp);
 
+		// 현재 스택의 탑과 root의 right가 동일하면
+		// root의 right를 방문하지 않았다는 것
 		if (root->right != NULL && peek(&tmp) == root->right) {
+			// root의 오른쪽 순회 시작
 			pop(&tmp);
 			push(&tmp, root);
 			root = root->right;
